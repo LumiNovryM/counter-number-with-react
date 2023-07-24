@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter Number</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        #root{
+            width: 100%;
+            height: 100vh;
+        }
+        .display{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .text{
+            margin-left: 30px;
+            margin-right: 30px;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const container = document.getElementById('root');
+        const root = ReactDOM.createRoot(container);
+
+        // Button Function
+        function Button({onClick,caption,disabled}) {
+            return (
+                    <button onClick={onClick} disabled={disabled}>
+                        {caption}
+                    </button>
+                )
+        }
+
+        // Text Function
+        function Text({value}) {
+            return (<p class="text">{value == 10 || value == -1 ? "Done" : value}</p>)
+        }
+
+        // Heading Function
+        function Heading({value}) {
+            return (<h1>{value}</h1>)
+        }
+
+        // Center Function
+        function Center({children}) {
+            return (<center>{children}</center>)
+        }
+
+        // Div Function
+        function Div({children}) {
+            return (<div class="display">{children}</div>)
+        }
+
+        // HomePage Function
+        function HomePage() {
+
+            // State Function 
+            const [likes, setLikes] = React.useState(0);
+
+            // Plus 
+            function plus() {
+                setLikes(likes + 1);
+            }
+
+            // Minus
+            function minus() {
+                setLikes(likes - 1);
+            }
+
+            // Reset 
+            function reset() {
+                setLikes(0);
+            }
+
+            return (
+                <>
+                    <Center>
+                        <Heading value="Counter Number" />
+                        <Div>
+                            <Button onClick={minus} caption="-" disabled={likes === 10 || likes === -1} />
+                            <Text value={likes} />
+                            <Button onClick={plus} caption="+" disabled={likes === 10 || likes === -1} />
+                        </Div>
+                        <Button disabled={likes !== 10 && likes !== -1git} onClick={reset} caption="Reset!" />
+                    </Center>
+                </>
+            )
+        }
+
+
+        // Render 
+        root.render(<HomePage />)
+
+
+    </script>
+
+</body>
+</html>
